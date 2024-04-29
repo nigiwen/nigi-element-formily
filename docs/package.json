@@ -1,0 +1,20 @@
+{
+  "name": "docs",
+  "type": "module",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "docs:dev": "vitepress dev",
+    "docs:build": "vitepress build",
+    "docs:preview": "vitepress preview"
+  },
+  "devDependencies": {
+    "@element-plus/icons-vue": "^2.3.1",
+    "@element-plus/metadata": "^0.0.20240427",
+    "@iconify-json/carbon": "^1.1.31",
+    "@iconify-json/ri": "^1.1.20",
+    "shiki": "^1.3.0",
+    "unocss": "^0.59.4",
+    "vitepress": "^1.1.3"
+  }
+}

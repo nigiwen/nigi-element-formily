@@ -1,0 +1,37 @@
+{
+  "compilerOptions": {
+    "target": "esnext",
+    "jsx": "preserve",
+    "lib": ["esnext", "dom"],
+    "module": "esnext",
+    "moduleResolution": "bundler",
+    "resolveJsonModule": true,
+    "types": [
+      "node",
+      "vite/client",
+      "vitest/importMeta",
+      "element-plus/global"
+    ],
+    "strict": true,
+    "strictNullChecks": true,
+    "esModuleInterop": true,
+    "skipDefaultLibCheck": true,
+    "skipLibCheck": true
+  },
+  "include": [
+    "docs",
+    "docs/.vitepress/**/*",
+    "**/vite.config.*"
+  ],
+  "exclude": [
+    "**/dist/**",
+    "**/node_modules/**",
+    "**/client/**",
+    "**/playground/**",
+    "**/examples/**",
+    "**/fixtures/**",
+    "**/interactive/**",
+    "**/test/dts/**",
+    "packages/eslint-plugin/**"
+  ]
+}

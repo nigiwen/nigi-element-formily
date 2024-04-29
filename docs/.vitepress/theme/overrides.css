@@ -1,0 +1,204 @@
+@import url('element-plus/theme-chalk/dark/css-vars.css');
+
+.vp-code-group .tabs label {
+  background-color: transparent;
+}
+
+table {
+  width: 100% !important;
+  display: table;
+}
+
+.custom-block.tip .custom-block-title {
+  color: var(--vp-c-brand-1);
+}
+
+.VPHero .image-bg {
+  z-index: 1;
+  opacity: 0.8;
+  transition: opacity 1s ease;
+}
+
+.VPHero .image-container:hover .image-bg {
+  opacity: 0.2;
+}
+
+/**
+ * VitePress: Custom fix
+ * -------------------------------------------------------------------------- */
+
+/*
+  Use lighter colors for links in dark mode for a11y.
+  Also specify some classes twice to have higher specificity
+  over scoped class data attribute.
+*/
+.dark .vp-doc a,
+.dark .vp-doc a > code,
+.dark .VPNavBarMenuLink.VPNavBarMenuLink:hover,
+.dark .VPNavBarMenuLink.VPNavBarMenuLink.active,
+.dark .link.link:hover,
+.dark .link.link.active,
+.dark .edit-link-button.edit-link-button,
+.dark .pager-link .title {
+  color: var(--vp-c-brand-lighter);
+}
+
+.dark .vp-doc a:hover,
+.dark .vp-doc a > code:hover {
+  color: var(--vp-c-brand-lightest);
+  opacity: 1;
+}
+
+/* Transition by color instead of opacity */
+.dark .vp-doc .custom-block a {
+  transition: color 0.25s;
+}
+
+
+/* VitePress Search */
+.VPLocalSearchBox .result {
+  --vp-c-bg-search-result: var(--vp-c-bg);
+  background: var(--vp-c-bg-search-result) !important;
+  padding: 4px !important;
+  border: 1px solid var(--vp-c-divider) !important;
+}
+.VPLocalSearchBox .result.selected {
+  --vp-c-bg-search-result: var(--vp-c-bg-soft) !important;
+}
+.VPLocalSearchBox .result .excerpt-gradient-top {
+  background: linear-gradient(var(--vp-c-bg-search-result),transparent) !important;
+}
+.VPLocalSearchBox .result .excerpt-gradient-bottom {
+  background: linear-gradient(transparent,var(--vp-c-bg-search-result)) !important;
+}
+.VPLocalSearchBox .title-icon {
+  display: none;
+}
+.VPLocalSearchBox .excerpt-wrapper {
+  margin-top: 4px;
+}
+
+/* VitePress VPNavBar */
+.VPNavBar:not(.home) .wrapper {
+  padding: 0 48px;
+  border-bottom: 1px solid var(--vp-c-divider);
+}
+.VPNavBar:not(.home) .wrapper .container {
+  max-width: 100%;
+}
+.VPNavBarTitle.has-sidebar .title {
+  border: none;
+  color: var(--vp-c-brand-1);
+}
+.logo {
+  margin-right: 4px !important;
+}
+.dark .VPNavBarTitle.has-sidebar .title {
+  filter: drop-shadow(9px 5px 11px var(--vp-c-brand-1));
+}
+.VPNavBar.has-sidebar .title {
+  padding: 0 !important;
+  position: relative !important;
+  width: auto !important;
+}
+.VPNavBar.has-sidebar .wrapper {
+  padding: 0 48px !important;
+  /* background: var(--vp-c-bg) !important; */
+
+  background-image: radial-gradient(transparent 1px, var(--vp-c-bg) 1px) !important;;
+  background-size: 4px 4px !important;
+  backdrop-filter: saturate(50%) blur(4px) !important;
+  -webkit-backdrop-filter: saturate(50%) blur(4px) !important;
+}
+.VPNavBar.has-sidebar .content {
+  padding: 0 !important;
+}
+
+/* VPSidebar */
+.VPSidebar {
+  padding-left: 48px !important;
+  padding-right: 48px !important;
+  background-color: var(--vp-c-bg) !important;
+  padding-top: calc(var(--vp-nav-height) + 48px) !important;
+  width: var(--vp-sidebar-width) !important;
+}
+.VPSidebar [tabindex="0"] .text {
+  font-size: 16px !important;
+  padding: 0 !important;
+  margin-bottom: 8px !important;
+}
+.VPSidebar .text {
+  padding: 10px 16px !important;
+  line-height: 1.5 !important;
+  font-size: 13px !important;
+  border-radius: 8px !important;
+}
+.VPSidebarItem.is-active .item .text {
+  background-color: rgba(139, 74, 252, .1) !important;
+}
+
+.VPDoc.has-aside .content-container {
+  max-width: initial !important;
+  margin: initial !important;
+}
+.VPContent.has-sidebar {
+  padding-left: 260px !important;
+  padding-right: 0 !important;
+}
+@media (max-width: 960px){
+  .VPContent.has-sidebar {
+    padding-left: 0 !important;
+  }
+}
+
+.VPDoc .container > .content {
+  padding: 64px 0 48px 88px !important;
+}
+
+.VPNavBar > .divider {
+  display: none;
+}
+
+.content-body {
+  background-color: transparent !important;
+}
+
+#VPSidebarNav > .group {
+  padding-top: 0 !important;
+}
+
+.vp-doc h1 {
+  margin-bottom: 32px;
+}
+
+.vp-doc h2 {
+  padding: 0;
+  margin: 36px 0 20px 0px;
+  padding-bottom: 4px;
+  border: none;
+}
+.vp-doc h2 .header-anchor {
+  top: 0;
+}
+
+.shiki {
+  background-color: transparent !important;
+  outline: none;
+}
+
+/* dark/light radial transition */
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation: none;
+  mix-blend-mode: normal;
+}
+
+::view-transition-old(root),
+.dark::view-transition-new(root) {
+  z-index: 1;
+}
+
+::view-transition-new(root),
+.dark::view-transition-old(root) {
+  z-index: 9999;
+}
