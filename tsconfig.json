@@ -19,9 +19,8 @@
     "skipLibCheck": true
   },
   "include": [
-    "docs",
     "docs/.vitepress/**/*",
-    "**/vite.config.*"
+    "**/*"
   ],
   "exclude": [
     "**/dist/**",
