@@ -8,9 +8,8 @@ title: Button 按钮
 
 ## 基础用法
 
-使用 `type`、`plain`、`round` 和 `circle` 来定义按钮的样式。
-<DemoCard path="button/basic" />
+:::demo 使用 `type`、`plain`、`round` 和 `circle` 来定义按钮的样式。
 
-```ts
-const [type, plain, round, circle] = ['primary', 'plain', 'round', 'circle']
-```
+button/basic
+
+:::

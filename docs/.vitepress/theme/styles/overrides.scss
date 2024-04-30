@@ -182,8 +182,11 @@ table {
 }
 
 .shiki {
-  background-color: transparent !important;
+  background-color: #F6F6F7 !important;
   outline: none;
+}
+.dark .shiki {
+  background-color: #161618 !important;
 }
 
 /* dark/light radial transition */

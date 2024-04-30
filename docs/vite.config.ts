@@ -27,7 +27,7 @@ export default defineConfig({
         '.vitepress/theme/composables',
       ],
       resolvers: [
-        ElementPlusResolver(),
+        ElementPlusResolver({ importStyle: false }),
       ],
     }),
     Components({
@@ -40,7 +40,7 @@ export default defineConfig({
         /\.md$/,
       ],
       resolvers: [
-        ElementPlusResolver(),
+        ElementPlusResolver({ importStyle: false }),
       ],
     }),
   ],

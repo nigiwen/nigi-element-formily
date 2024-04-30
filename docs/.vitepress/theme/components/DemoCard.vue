@@ -1,15 +1,27 @@
 <script setup lang='ts'>
 import { CaretTop } from '@element-plus/icons-vue'
+import { ElMessage } from 'element-plus'
 import { codeToHtml } from 'shiki'
 import { useData } from 'vitepress'
 
 const props = defineProps<{
   path: string
+  source: string
+  description: string
 }>()
 
-const demo = computed(() => {
+const { copy, isSupported } = useClipboard({
+  source: decodeURIComponent(props.source),
+  read: false,
+})
+const { isDark } = useData()
+const [sourceVisible, toggleSourceVisible] = useToggle()
+const sourceCodeRef = ref<HTMLButtonElement>()
+const code = ref()
+
+const Demo = computed(() => {
   try {
-    const modules: any = import.meta.glob('../../../examples/*/*.vue', { eager: true })
+    const modules = import.meta.glob<any>('../../../examples/*/*.vue', { eager: true })
 
     const key = Object.keys(modules).find(item => item.includes(props.path))
 
@@ -23,49 +35,36 @@ const demo = computed(() => {
   }
 })
 
-async function copyCode() {
+const decodedDescription = computed(() =>
+  decodeURIComponent(props.description!),
+)
 
-}
-const { isDark } = useData()
 watch(isDark, (val) => {
   decoded(val)
 }, { immediate: true })
-const [sourceVisible, toggleSourceVisible] = useToggle()
-const sourceCodeRef = ref<HTMLButtonElement>()
-const code = ref()
+
 async function decoded(isDark: boolean) {
-  const html = await codeToHtml(`  <div>3434341212</div>
-  <div>3434341212</div>
-  <div>3434341212</div>
-  <div>3434341212</div>
-  <div>3434341212</div>
-  <div>3434341212</div>
-  <div>3434341212</div>
-  <div>3434341212</div>
-  <div>3434341212</div>
-  <div>3434341212</div>
-  <div>3434341212</div>
-  <div>3434341212</div>
-  <div>3434341212</div>
-  <div>3434341212</div>
-  <div>3434341212</div>
-  <div>3434341212</div>
-  <div>3434341212</div>
-  <div>3434341212</div>
-  <div>3434341212</div>
-  <div>3434341212</div>
-  <div>3434341212</div>
-  <div>3434341212</div>
-  <div>3434341212</div>
-  <div>3434341212</div>
-  <div>3434341212</div>
-  <div>3434341212</div>
-  <div>3434341212</div>
-  <div>3434341212</div>`, {
-    lang: 'html',
-    theme: isDark ? 'vitesse-dark' : 'vitesse-light',
-  })
+  const html = await codeToHtml(
+    decodeURIComponent(props.source),
+    {
+      lang: 'vue',
+      theme: isDark ? 'github-dark' : 'github-light',
+    },
+  )
   code.value = html
+}
+
+async function copyCode() {
+  if (!isSupported)
+    ElMessage.error('复制失败，请手动复制')
+
+  try {
+    await copy()
+    ElMessage.success('复制成功')
+  }
+  catch (e: any) {
+    ElMessage.error(e.message)
+  }
 }
 
 function onSourceVisibleKeydown(e: KeyboardEvent) {
@@ -78,76 +77,81 @@ function onSourceVisibleKeydown(e: KeyboardEvent) {
 </script>
 
 <template>
-  <div class="example">
-    <div class="example-showcase">
-      <component :is="demo" v-if="demo" v-bind="$attrs" />
-    </div>
+  <ClientOnly>
+    <!-- danger here DO NOT USE INLINE SCRIPT TAG -->
+    <p text="sm" v-html="decodedDescription" />
 
-    <ElDivider class="!m-0" />
+    <div class="example">
+      <div class="example-showcase">
+        <component :is="Demo" v-if="Demo" v-bind="$attrs" />
+      </div>
 
-    <div class="op-btns">
-      <ElTooltip
-        content="复制代码"
-        :show-arrow="false"
-        :trigger="['hover', 'focus']"
-        :trigger-keys="[]"
-      >
-        <ElIcon
-          :size="16"
-          aria-label="复制代码"
-          class="op-btn"
+      <ElDivider class="!m-0" />
+
+      <div class="op-btns">
+        <ElTooltip
+          content="复制代码"
+          :show-arrow="false"
+          :trigger="['hover', 'focus']"
+          :trigger-keys="[]"
+        >
+          <ElIcon
+            :size="16"
+            aria-label="复制代码"
+            class="op-btn"
+            tabindex="0"
+            role="button"
+            @click="copyCode"
+            @keydown.prevent.enter="copyCode"
+            @keydown.prevent.space="copyCode"
+          >
+            <div i-ri-file-copy-line />
+          </ElIcon>
+        </ElTooltip>
+        <ElTooltip
+          content="查看源代码"
+          :show-arrow="false"
+          :trigger="['hover', 'focus']"
+          :trigger-keys="[]"
+        >
+          <button
+            ref="sourceCodeRef"
+            :aria-label="
+              sourceVisible ? '隐藏源代码' : '查看源代码'
+            "
+            class="reset-btn el-icon op-btn"
+            @click="toggleSourceVisible()"
+          >
+            <ElIcon :size="16">
+              <div i-ri-code-line />
+            </ElIcon>
+          </button>
+        </ElTooltip>
+      </div>
+
+      <ElCollapseTransition>
+        <div v-show="sourceVisible" class="example-source-wrapper">
+          <div class="example-source language-vue" v-html="code" />
+        </div>
+      </ElCollapseTransition>
+
+      <Transition name="el-fade-in-linear">
+        <div
+          v-show="sourceVisible"
+          class="example-float-control"
           tabindex="0"
           role="button"
-          @click="copyCode"
-          @keydown.prevent.enter="copyCode"
-          @keydown.prevent.space="copyCode"
-        >
-          <div i-ri-file-copy-line />
-        </ElIcon>
-      </ElTooltip>
-      <ElTooltip
-        content="查看源代码"
-        :show-arrow="false"
-        :trigger="['hover', 'focus']"
-        :trigger-keys="[]"
-      >
-        <button
-          ref="sourceCodeRef"
-          :aria-label="
-            sourceVisible ? '隐藏源代码' : '查看源代码'
-          "
-          class="reset-btn el-icon op-btn"
-          @click="toggleSourceVisible()"
+          @click="toggleSourceVisible(false)"
+          @keydown="onSourceVisibleKeydown"
         >
           <ElIcon :size="16">
-            <div i-ri-code-line />
+            <CaretTop />
           </ElIcon>
-        </button>
-      </ElTooltip>
+          <span>{{ '隐藏源代码' }}</span>
+        </div>
+      </Transition>
     </div>
-
-    <ElCollapseTransition>
-      <div v-show="sourceVisible" class="example-source-wrapper">
-        <div class="example-source language-vue" v-html="code" />
-      </div>
-    </ElCollapseTransition>
-
-    <Transition name="el-fade-in-linear">
-      <div
-        v-show="sourceVisible"
-        class="example-float-control"
-        tabindex="0"
-        role="button"
-        @click="toggleSourceVisible(false)"
-        @keydown="onSourceVisibleKeydown"
-      >
-        <ElIcon :size="16">
-          <CaretTop />
-        </ElIcon>
-        <span>{{ '隐藏源代码' }}</span>
-      </div>
-    </Transition>
-  </div>
+  </ClientOnly>
 </template>
 
 <style scoped lang='scss'>

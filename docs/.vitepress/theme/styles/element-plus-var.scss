@@ -1,0 +1,46 @@
+$-colors: (
+  'primary': (
+    'base': #1677ff,
+  ),
+  'success': (
+    'base': #52c41a,
+  ),
+  'warning': (
+    'base': #faad14,
+  ),
+  'danger': (
+    'base': #ff4d4f,
+  ),
+  'error': (
+    'base': #ff4d4f,
+  ),
+);
+$border-radius: (
+  'base': '6px',
+);
+$text-color: (
+  'primary': rgb(0 0 0 / 88%),
+  'regular': rgb(0 0 0 / 88%),
+);
+$transition-duration: (
+  '': 0.1s,
+  'fast': 0s,
+);
+$table: (
+  'header-bg-color': '#F5F7FA',
+  'header-text-color': 'rgb(0 0 0 / 88%)',
+);
+$dialog: (
+  'margin-top': 10vh,
+);
+
+@forward 'element-plus/theme-chalk/src/common/var.scss' with (
+  $colors: $-colors,
+  $border-radius: $border-radius,
+  $text-color: $text-color,
+  $transition-duration: $transition-duration,
+  $table: $table,
+  $dialog: $dialog
+);
+@use 'element-plus/theme-chalk/src/index.scss' as *;
+@use "element-plus/theme-chalk/src/dark/css-vars.scss" as *;

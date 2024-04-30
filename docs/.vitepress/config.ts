@@ -1,7 +1,20 @@
+import path from 'node:path'
+import fs from 'node:fs'
 import type { DefaultTheme } from 'vitepress'
 import { defineConfig } from 'vitepress'
 import { transformerTwoslash } from '@shikijs/vitepress-twoslash'
+import mdContainer from 'markdown-it-container'
+import MarkdownIt from 'markdown-it'
+import Shiki from '@shikijs/markdown-it'
 import { version } from '../../package.json'
+
+const md = MarkdownIt()
+md.use(await Shiki({
+  themes: {
+    light: 'github-light',
+    dark: 'github-dark',
+  },
+}))
 
 const ogUrl = '//'
 const ogImage = `${ogUrl}og.png#1`
@@ -84,14 +97,51 @@ export default defineConfig({
 
   markdown: {
     theme: {
-      light: 'vitesse-light',
-      dark: 'vitesse-dark',
+      light: 'github-light',
+      dark: 'github-dark',
     },
     codeTransformers: [
       transformerTwoslash({
         processHoverInfo: info => info.replace(/_unocss_core\./g, ''),
       }),
     ],
+    config: (md) => {
+      md.use(mdContainer, 'demo', {
+        validate(params: string) {
+          return !!params.trim().match(/^demo\s*(.*)$/)
+        },
+
+        render(tokens: { [key: string]: any }, idx: number) {
+          const m = tokens[idx].info.trim().match(/^demo\s*(.*)$/)
+          if (tokens[idx].nesting === 1 /* means the tag is opening */) {
+            const description = m && m.length > 1 ? m[1] : ''
+            const sourceFileToken = tokens[idx + 2]
+            let source = ''
+            const sourceFile = sourceFileToken.children?.[0].content ?? ''
+
+            if (sourceFileToken.type === 'inline') {
+              source = fs.readFileSync(
+                path.resolve(path.resolve('../docs'), 'examples', `${sourceFile}.vue`),
+                'utf-8',
+              )
+            }
+            if (!source)
+              throw new Error(`没找到文件: ${sourceFile}`)
+
+            return `
+              <DemoCard
+                source="${encodeURIComponent(source)}" 
+                path="${sourceFile}"
+                description="${encodeURIComponent(md.render(description))}"
+              >
+            `
+          }
+          else {
+            return '</DemoCard>'
+          }
+        },
+      })
+    },
   },
 
   themeConfig: {
