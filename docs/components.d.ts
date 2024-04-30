@@ -10,7 +10,6 @@ declare module 'vue' {
     ContentExample: typeof import('./.vitepress/theme/components/ContentExample.vue')['default']
     ContentExamples: typeof import('./.vitepress/theme/components/ContentExamples.vue')['default']
     ContentIntegrations: typeof import('./.vitepress/theme/components/ContentIntegrations.vue')['default']
-    Contributors: typeof import('./.vitepress/theme/components/Globals/Contributors.vue')['default']
     DemoCard: typeof import('./.vitepress/theme/components/DemoCard.vue')['default']
     ElButton: typeof import('element-plus/es')['ElButton']
     ElCollapseTransition: typeof import('element-plus/es')['ElCollapseTransition']
@@ -19,9 +18,5 @@ declare module 'vue' {
     ElTooltip: typeof import('element-plus/es')['ElTooltip']
     HomePage: typeof import('./.vitepress/theme/components/HomePage.vue')['default']
     LinkGrid: typeof import('./.vitepress/theme/components/LinkGrid.vue')['default']
-    VpDemo: typeof import('./.vitepress/theme/components/Demo/VpDemo.vue')['default']
-    VpExample: typeof import('./.vitepress/theme/components/Demo/VpExample.vue')['default']
-    VpLink: typeof import('./.vitepress/theme/components/Common/VpLink.vue')['default']
-    VpSourceCode: typeof import('./.vitepress/theme/components/Demo/VpSourceCode.vue')['default']
   }
 }
