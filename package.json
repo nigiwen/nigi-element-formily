@@ -40,7 +40,7 @@
     "dist"
   ],
   "scripts": {
-    "build": "unbuild",
+    "build": "pnpm run docs:build & unbuild",
     "dev": "unbuild --stub",
     "lint": "eslint --cache .",
     "lint:fix": "nr lint --fix",
