@@ -9,19 +9,11 @@
 This is a formily element plus framework
 
 > **Note**:
-> Replace `nigi-element-plus`, `This is a formily element plus framework` and `antfu` globally to use this template.
-
-## Sponsors
-
-<p align="center">
-  <a href="https://cdn.jsdelivr.net/gh/antfu/static/sponsors.svg">
-    <img src='https://cdn.jsdelivr.net/gh/antfu/static/sponsors.svg'/>
-  </a>
-</p>
+> Replace `nigi-element-plus`, `This is a formily element plus framework` and `wen403` globally to use this template.
 
 ## License
 
-[MIT](./LICENSE) License © 2023-PRESENT [Anthony Fu](https://github.com/antfu)
+[MIT](./LICENSE) License © 2023-PRESENT [Anthony Fu](https://github.com/wen403)
 
 <!-- Badges -->
 
@@ -31,7 +23,7 @@ This is a formily element plus framework
 [npm-downloads-href]: https://npmjs.com/package/nigi-element-plus
 [bundle-src]: https://img.shields.io/bundlephobia/minzip/nigi-element-plus?style=flat&colorA=080f12&colorB=1fa669&label=minzip
 [bundle-href]: https://bundlephobia.com/result?p=nigi-element-plus
-[license-src]: https://img.shields.io/github/license/antfu/nigi-element-plus.svg?style=flat&colorA=080f12&colorB=1fa669
-[license-href]: https://github.com/antfu/nigi-element-plus/blob/main/LICENSE
+[license-src]: https://img.shields.io/github/license/wen403/nigi-element-plus.svg?style=flat&colorA=080f12&colorB=1fa669
+[license-href]: https://github.com/wen403/nigi-element-plus/blob/main/LICENSE
 [jsdocs-src]: https://img.shields.io/badge/jsdocs-reference-080f12?style=flat&colorA=080f12&colorB=1fa669
 [jsdocs-href]: https://www.jsdocs.io/package/nigi-element-plus
