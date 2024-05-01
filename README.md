@@ -13,7 +13,7 @@ This is a formily element plus framework
 
 ## License
 
-[MIT](./LICENSE) License © 2023-PRESENT [Anthony Fu](https://github.com/wen403)
+[MIT](./LICENSE) License © 2023-PRESENT [nigi wen](https://github.com/wen403)
 
 <!-- Badges -->
 
