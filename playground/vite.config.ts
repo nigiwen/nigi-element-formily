@@ -1,0 +1,41 @@
+import { defineConfig } from 'vite'
+import Vue from '@vitejs/plugin-vue'
+import UnoCSS from 'unocss/vite'
+import Components from 'unplugin-vue-components/vite'
+import AutoImport from 'unplugin-auto-import/vite'
+
+// https://vitejs.dev/config/
+export default defineConfig({
+  base: '/play/',
+  plugins: [
+    Vue(),
+    UnoCSS(),
+    Components({
+      dirs: [
+        'src/components',
+      ],
+      dts: 'src/components.d.ts',
+    }),
+    AutoImport({
+      imports: [
+        'vue',
+        '@vueuse/core',
+        '@vueuse/math',
+      ],
+      dirs: [
+        'src/composables',
+      ],
+      vueTemplate: true,
+      dts: 'src/auto-imports.d.ts',
+    }),
+  ],
+  build: {
+    outDir: '../docs/dist/play',
+    emptyOutDir: true,
+    rollupOptions: {
+      input: [
+        './index.html',
+      ],
+    },
+  },
+})

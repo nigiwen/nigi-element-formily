@@ -1,0 +1,23 @@
+{
+  "name": "@nigi-element-formily/element-plus",
+  "type": "module",
+  "version": "0.0.0",
+  "private": true,
+  "description": "element-plus formily",
+  "sideEffects": false,
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "require": "./dist/index.umd.cjs"
+    }
+  },
+  "main": "./dist/index.umd.cjs",
+  "module": "./dist/index.js",
+  "files": ["dist"],
+  "scripts": {
+    "build": "vite build"
+  },
+  "peerDependencies": {
+    "vue": "^3.4.25"
+  }
+}

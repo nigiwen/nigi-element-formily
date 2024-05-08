@@ -18,7 +18,7 @@ md.use(await Shiki({
 
 const ogUrl = '//'
 const ogImage = `${ogUrl}og.png#1`
-const title = 'ElemFormily'
+const title = 'Element Formily'
 const description = '使用 Element Plus 结合 Formily 的 UI 框架'
 
 const Guides: DefaultTheme.NavItemWithLink[] = [
@@ -49,11 +49,11 @@ const Nav: DefaultTheme.NavItem[] = [
     items: [
       {
         text: 'Release Notes',
-        link: 'https://github.com/wen403/nigi-element-plus/releases',
+        link: 'https://github.com/wen403/nigi-element-formily/releases',
       },
       {
         text: 'Contributing',
-        link: 'https://github.com/unocss/nigi-element-plus/blob/main/CONTRIBUTING.md',
+        link: 'https://github.com/unocss/nigi-element-formily/blob/main/CONTRIBUTING.md',
       },
     ],
   },
@@ -158,7 +158,7 @@ export default defineConfig({
       text: 'Suggest changes to this page',
     },
     socialLinks: [
-      { icon: 'github', link: 'https://github.com/wen403/nigi-element-plus' },
+      { icon: 'github', link: 'https://github.com/wen403/nigi-element-formily' },
     ],
     footer: {
       message: '基于 MIT 许可发布',
