@@ -1,7 +1,8 @@
+<!-- eslint-disable no-console -->
 <script setup lang="ts">
 import { EFInput } from '@nigi-element-formily/element-plus'
 
-// console.log(EFInput)
+console.log(EFInput)
 </script>
 
 <template>
